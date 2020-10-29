@@ -8,6 +8,7 @@ import Login from '../screens/login';
 import Register from '../screens/register';
 import Loading from '../screens/loading';
 import OrderListing from '../screens/orderListing';
+import { Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import OrderDetails from '../screens/orderDetails';
 import ItemList from "../screens/ItemList";
@@ -24,24 +25,55 @@ const TopTab = createMaterialTopTabNavigator();
 
 const bottomNavigation = () => {
     return (
-        <BottomTab.Navigator>
+        <BottomTab.Navigator
+        
+        tabBarOptions={{
+            activeTintColor: '#C75300',
+            inactiveTintColor: '#6D7C8C',
+            style: {
+                borderTopColor: '#EAEAEA',
+            },
+            labelStyle: {
+                textAlign: 'center',
+                fontSize: 12,
+                fontFamily: "NunitoSans-SemiBold",
+            }
+        }}>
             <BottomTab.Screen name="Order" component={OrderNavigation}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
-                        <Icon type='octicon' name='package' />
+                        focused
+                            ? <Image
+                            source={require('../assets/Images/orderFocused.png')}
+                            />
+                            : <Image
+                            source={require('../assets/Images/orderDefault.png')}
+                            />
                     )
                 }} />
-            <BottomTab.Screen name="OrderHistory" component={OrderHistory}
+            <BottomTab.Screen name="Order History" component={OrderHistory}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
-                        <Icon name='history' />
+                        focused
+                            ? <Image
+                            source={require('../assets/Images/historyFocused.png')}
+                            />
+                            : <Image
+                            source={require('../assets/Images/historyDefault.png')}
+                            />
                     )
                 }} />
             <BottomTab.Screen name="Account" component={Account}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
-                        <Icon name='account-box' />
-                    )
+                        focused
+                            ? <Image
+                            source={require('../assets/Images/accountFocused.png')}
+                            />
+                            : <Image
+                            source={require('../assets/Images/accountDefault.png')}
+                            />
+                    ),
                 }} />
         </BottomTab.Navigator>
     )
