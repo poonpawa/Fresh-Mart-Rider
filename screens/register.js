@@ -14,57 +14,63 @@ const register = (props) => {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>{`Register\n On Demand Delivery`}<Text style={{ color: "#C75300" }}> Rider</Text></Text>
-
             <View style={styles.form}>
-                <View>
-                    <Input
+                <View style={styles.inputcontainer}>
+                    <Text style={styles.inputlabel}>Name</Text>
+                    <TextInput style={styles.inputbox} 
+                        underlineColorAndroid = "transparent"
+                        selectionColor ='#C75300'
                         placeholder="Name"
-                        inputStyle={styles.input}
                         autoCapitalize="none"
                         onChangeText={name => setName(name)}
                         value={name}
-                    ></Input>
+                    ></TextInput>
                 </View>
 
-                <View>
-                    <Input
-                        placeholder="Email Address"
-                        inputStyle={styles.input}
+                <View style={styles.inputcontainer}>
+                    <Text style={styles.inputlabel}>Email address</Text>
+                    <TextInput style={styles.inputbox}
+                        underlineColorAndroid = "transparent" 
+                        selectionColor ='#C75300'
+                        placeholder="Email address"
                         autoCapitalize="none"
                         onChangeText={email => setEmail(email)}
                         value={email}
-                    ></Input>
+                    ></TextInput>
                 </View>
 
-                <View>
-                    <Input
-                        placeholder="phone"
-                        inputStyle={styles.input}
+                <View style={styles.inputcontainer}>
+                    <Text style={styles.inputlabel}>Phone number</Text>
+                    <TextInput style={styles.inputbox}
+                        underlineColorAndroid = "transparent" 
+                        selectionColor ='#C75300'
+                        placeholder="Phone"
                         autoCapitalize="none"
                         onChangeText={phone => setPhone(phone)}
                         value={phone}
-                    ></Input>
+                    ></TextInput>
                 </View>
 
-                <View>
-                    <Input
+
+                <View style={styles.inputcontainer}>
+                    <Text style={styles.inputlabel}>Password</Text>
+                    <TextInput style={styles.inputbox} 
+                        underlineColorAndroid = "transparent"
+                        selectionColor ='#C75300'
                         placeholder="Password"
-                        inputStyle={styles.input}
                         autoCapitalize="none"
                         secureTextEntry={true}
                         onChangeText={password => setpassword(password)}
                         value={password}
-                    ></Input>
+                    ></TextInput>
                 </View>
 
+                <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.primarybtn} />
 
-                <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.btn} />
 
-
-                <View style={{ alignSelf: "center", marginTop: 25 }}>
-                    <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        Already have an account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("SignIn") }}> Login</Text>
+                <View style={{ alignSelf: "center", marginTop: 16 }}>
+                    <Text style={{ color: "#505971", fontSize: 15, fontFamily: "NunitoSans-Regular", }}>
+                        Already have an account?<Text style={{ color: "#C75300", fontFamily: "NunitoSans-SemiBold" }} onPress={() => { navigate("SignIn") }}> Login</Text>
                     </Text>
                 </View>
 
@@ -103,26 +109,39 @@ const onRegister = (name, email, phone, password, navigate) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 20
-    },
-    title: {
-        marginTop: 15,
-        fontSize: 20,
-        fontWeight: "100",
-        textAlign: "center"
+        backgroundColor: 'white'
     },
     form: {
-        marginTop: 20
+        marginTop: 8,
+        marginLeft: 16,
+        marginRight: 16
     },
-    input: {
-        fontSize: 17
+    inputcontainer: {
+        marginTop: 24
     },
-    btn: {
-        width: 120,
-        alignSelf: "center",
-        margin: 15,
-        backgroundColor: "#C75300"
-    }
+    inputlabel: {
+        color: '#383F51',
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+    },
+    inputbox: {
+        height: 40,
+        color: '#505971',
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        borderColor: '#C7CBD8',
+        borderWidth: 1,
+        borderRadius: 4,
+        marginTop: 8,
+        paddingLeft: 8
+    },
+    primarybtn: {
+        backgroundColor: "#C75300",
+        borderRadius: 4,
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        marginTop: 40
+    },
 });
 
 export default register

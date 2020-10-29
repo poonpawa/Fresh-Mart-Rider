@@ -12,13 +12,12 @@ const login = (props) => {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>{`Login\n On Demand Delivery Rider`}<Text style={{ color: "#C75300" }}> Rider</Text></Text>
-
             <View style={styles.form}>
-                <View>
-                    <Text style={styles.inputText}>Email Address</Text>
-                    <TextInput
-                        style={styles.input}
+                <View style={styles.inputcontainer}>
+                    <Text style={styles.inputlabel}>Email address</Text>
+                    <TextInput style={styles.inputbox} 
+                        underlineColorAndroid = "transparent"
+                        selectionColor ='#C75300'
                         autoCapitalize="none"
                         onChangeText={email => setEmail(email)}
                         value={email}
@@ -26,10 +25,11 @@ const login = (props) => {
                 </View>
 
 
-                <View>
-                    <Text style={styles.inputText}> Password</Text>
-                    <TextInput
-                        style={styles.input}
+                <View style={styles.inputcontainer}>
+                    <Text style={styles.inputlabel}>Password</Text>
+                    <TextInput style={styles.inputbox} 
+                        underlineColorAndroid = "transparent"
+                        selectionColor ='#C75300'
                         autoCapitalize="none"
                         secureTextEntry={true}
                         onChangeText={password => setpassword(password)}
@@ -38,12 +38,12 @@ const login = (props) => {
                 </View>
 
 
-                <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.btn} />
+                <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
 
 
-                <View style={{ alignSelf: "center", marginTop: 25 }}>
-                    <Text style={{ color: "#414959", fontSize: 15, fontWeight: "bold" }}>
-                        No account?<Text style={{ color: "#C75300" }} onPress={() => { navigate("SignUp") }}> Sign Up</Text>
+                <View style={{ alignSelf: "center", marginTop: 16 }}>
+                    <Text style={{ color: "#505971", fontSize: 15, fontFamily: "NunitoSans-Regular", }}>
+                        Don't have an account?<Text style={{ color: "#C75300", fontFamily: "NunitoSans-SemiBold" }} onPress={() => { navigate("SignUp") }}> Sign Up</Text>
                     </Text>
                 </View>
 
@@ -76,34 +76,39 @@ const onlogin = (email, password, navigate) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 20
-    },
-    title: {
-        marginTop: 35,
-        fontSize: 30,
-        fontWeight: "100",
-        textAlign: "center"
+        backgroundColor: 'white'
     },
     form: {
-        marginTop: 30,
-        marginHorizontal: 5,
-        height: 150
+        marginTop: 8,
+        marginLeft: 16,
+        marginRight: 16
     },
-    inputText: {
-        fontSize: 20,
-        color: "#8A8F9E"
+    inputcontainer: {
+        marginTop: 24
     },
-    input: {
-        fontSize: 20,
-        borderBottomColor: "#8A8F9E",
-        borderBottomWidth: StyleSheet.hairlineWidth,
+    inputlabel: {
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#383F51'
+    },
+    inputbox: {
         height: 40,
-        marginBottom: 15
+        color: '#505971',
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        borderColor: '#C7CBD8',
+        borderWidth: 1,
+        borderRadius: 4,
+        marginTop: 8,
+        paddingLeft: 8
+        
     },
-    btn: {
-        width: 120,
-        alignSelf: "center",
-        backgroundColor: "#C75300"
-    }
+    primarybtn: {
+        backgroundColor: "#C75300",
+        borderRadius: 4,
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        marginTop: 40
+    },
 });
 export default login;
