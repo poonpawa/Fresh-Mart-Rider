@@ -14,25 +14,34 @@ const geolocation = () => {
     useEffect(() => UserService().AddData('Address', address), [address])
 
     const getLocation = async () => {
-        await Geolocation.watchPosition(
-            position => {
-                setLocation(position);
-                getAddress(position.coords.latitude, position.coords.longitude).then(
-                    (data) => {
-                        UserService().UpdateLocation(position.coords)
-                    }
-                );
-            },
-            error => Alert.alert(error.message),
-            {
-                enableHighAccuracy: true,
-                showLocationDialog: true,
-                timeout: 20000,
-                maximumAge: 1000,
-                distanceFilter: 1, //for frequent update accuracy
-
+        try {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              await Geolocation.watchPosition(
+                  position => {
+                      setLocation(position);
+                      getAddress(position.coords.latitude, position.coords.longitude).then(
+                          () => {
+                              UserService().UpdateLocation(position.coords)
+                          }
+                      );
+                  },
+                  error => Alert.alert(error.message),
+                  {
+                      enableHighAccuracy: true,
+                      timeout: 20000,
+                      maximumAge: 1000,
+                      distanceFilter: 1 //for 1metre accuracy
+                  }
+              );
+            } else {
+              console.log("Location permission denied");
             }
-        );
+          } catch (err) {
+            console.warn(err);
+          }
     };
 
     const getAddress = (lat, lng) => {

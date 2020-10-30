@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import firebase from '@react-native-firebase/app';
 import Geolocation from "../components/geolocation";
@@ -22,10 +22,16 @@ const home = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text h2>Rider's App</Text>
-            <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
-            <Geolocation />
+            <View style={styles.content}>
+                <Text style={styles.heading}>Welcome </Text><Text style={{color: '#C75300', fontSize: 25}}>{displayName}</Text>
+            </View>
+            <Image style={{marginTop: -100}}
+                    source={require('../assets/Images/RiderClipart.png')}
+                    style={{ width: 200, height: 250 }}
+            />
+            
             <AvailabilitySwitch />
+            <Geolocation />
         </View>
     )
 }
@@ -33,8 +39,19 @@ const home = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        marginTop: 30
+        backgroundColor: 'white',
+        fontFamily: "NunitoSans-SemiBold",
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    heading: {
+        color: '#383F51', 
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 25,
+    },
+    content: {
+        flex: 1,
+        flexDirection: 'row',
     },
     btn: {
         width: 100,

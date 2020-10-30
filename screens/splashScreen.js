@@ -11,7 +11,7 @@ const splashScreen = ({ navigation }) => {
             
             <Image 
                 style={styles.splashTitle}
-                source={require('../assets/Images/FreshMart.png')} />
+                source={require('../assets/Images/FreshMart_Delivery_Partner.png')} />
             
             <Text style={styles.desc}>Deliver fresh groceries and earn</Text>  
 
@@ -44,10 +44,11 @@ const styles = StyleSheet.create({
     },
     splashImage: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: -40
     },
     splashTitle: {
-        marginTop: -60,
+        marginTop: -40,
     },
     desc: {
         textAlign: 'center', 

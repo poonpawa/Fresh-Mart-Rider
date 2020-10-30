@@ -21,7 +21,7 @@ const navigateBtn = (props) => {
     return (
         <View>
             <Button
-                buttonStyle={{ borderRadius: 0, marginVertical: 10, marginHorizontal: 20 }}
+                buttonStyle={{ borderRadius: 4, marginVertical: 10, marginHorizontal: 0, backgroundColor: '#C75300',}}
                 title='navigate' onPress={() => startNavigation()} />
         </View>
     )

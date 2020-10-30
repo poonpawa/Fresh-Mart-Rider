@@ -20,8 +20,20 @@ const availaibilitySwitch = () => {
 
     return (
         <View style={styles.container}>
+        
+        {!isEnabled? 
+            <View>
+                <Text>You are offline</Text>
+                <Text>You need to be online to start deliverying</Text>
+            </View>
+            : 
+            <View>
+                <Text style={{color: 'blue'}}>You are now online</Text>
+            </View>  
+        }
+        
             <View style={styles.content}>
-                <Text>Set Availability:</Text>
+                <Text style={styles.switchText}>Start Delivering</Text>
                 <View style={styles.switch}>
                     <Switch
                         trackColor={{ false: "#767577", true: "#000000" }}
@@ -37,17 +49,22 @@ const availaibilitySwitch = () => {
 }
 
 const styles = StyleSheet.create({
-    constainer: {
-        backgroundColor: 'red',
+    container: {
         justifyContent: "center",
+        alignItems: 'center',
         height: 100,
         padding: 20,
         flex: 1
     },
+    switchText: {
+        fontSize: 20,
+        fontFamily: "NunitoSans-SemiBold",
+        paddingHorizontal: 10
+    },
     content: {
         flexDirection: 'row',
         width: 200,
-
+        fontSize: 20,
     },
     switch: {
         width: 50
