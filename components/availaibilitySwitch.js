@@ -22,16 +22,15 @@ const availaibilitySwitch = () => {
         <View style={styles.container}>
         
         {!isEnabled? 
-            <View>
+            <View style={{ alignItems: 'center'}}>
                 <Text>You are offline</Text>
                 <Text>You need to be online to start deliverying</Text>
             </View>
-            : 
-            <View>
+            :
+            <View style={{alignItems: 'center'}}>
                 <Text style={{color: 'blue'}}>You are now online</Text>
-            </View>  
+            </View>
         }
-        
             <View style={styles.content}>
                 <Text style={styles.switchText}>Start Delivering</Text>
                 <View style={styles.switch}>
@@ -43,10 +42,9 @@ const availaibilitySwitch = () => {
                     />
                 </View>
             </View>
+        
         </View>
-
-    )
-}
+     )}   
 
 const styles = StyleSheet.create({
     container: {

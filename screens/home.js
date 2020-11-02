@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Image } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import firebase from '@react-native-firebase/app';
-import Geolocation from "../components/geolocation";
 import NotificationTokenService from "../services/notification-token-service";
 import AvailabilitySwitch from "../components/availaibilitySwitch";
 import messaging from '@react-native-firebase/messaging';
@@ -31,7 +30,6 @@ const home = (props) => {
             />
             
             <AvailabilitySwitch />
-            <Geolocation />
         </View>
     )
 }
@@ -39,19 +37,17 @@ const home = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
-        fontFamily: "NunitoSans-SemiBold",
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    heading: {
-        color: '#383F51', 
-        fontFamily: "NunitoSans-SemiBold",
-        fontSize: 25,
+        alignItems: "center",
+        marginTop: 30,
+        fontFamily: "NunitoSans-SemiBold"
     },
     content: {
-        flex: 1,
         flexDirection: 'row',
+        fontSize: 25,
+        height: 35
+    },
+    heading: {
+        fontSize: 25
     },
     btn: {
         width: 100,

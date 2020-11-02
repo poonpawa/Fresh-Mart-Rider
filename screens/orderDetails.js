@@ -4,15 +4,16 @@ import { Text } from "react-native-elements";
 import ReachedStoreBtn from "../components/reachedStoreBtn";
 import OrderService from '../services/order-service';
 import NavigateBtn from "../components/navigateBtn";
+import AsyncStorage from '@react-native-community/async-storage';
 
 const orderDetails = ({ navigation, route }) => {
     const [orderData, setorderData] = useState(null)
     const id = route.params.orderID;
+    AsyncStorage.setItem('orderId', id);
     useEffect(() => {
         OrderService().getOrderData(id).then((data) => {
             setorderData(data);
         })
-
     }, [])
 
     return (
