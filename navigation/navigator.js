@@ -19,6 +19,8 @@ import Account from '../screens/account';
 import OrderHistory from '../screens/orderHistory';
 import ModalHeader from '../components/headers/modalHeader';
 import LogoHeader from '../components/headers/logoHeader';
+import Address from '../screens/address';
+
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -108,7 +110,13 @@ const OrderNavigation = () => {
 
 const AppNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: true }}>
+        <Stack.Navigator initialRouteName="Address" screenOptions={{ headerShown: true }}>
+            <Stack.Screen name="Address" component={Address} 
+                options={{
+                header: ({ navigation }) => (
+                    <LogoHeader/>
+                )
+            }}/>
             <Stack.Screen name="Home" component={bottomNavigation} 
                 options={{
                 header: ({ navigation }) => (
@@ -117,11 +125,19 @@ const AppNavigation = () => {
             }}/>
             <Stack.Screen name="orderDetails" component={TopTapNavigation} options={{
                 header: ({ navigation }) => (
-                    <LogoHeader/>
+                    <ModalHeader navigation={navigation} /> 
                 )
             }} />
-            <Stack.Screen name="tracking" component={Tracking} />
-            <Stack.Screen name="delivered" component={Delivered} />
+            <Stack.Screen name="tracking" component={Tracking} options={{
+                header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} />    
+                    )    
+            }}/>
+            <Stack.Screen name="delivered" component={Delivered} options={{
+                header: ({ navigation }) => (
+                        <ModalHeader navigation={navigation} />    
+                    )    
+            }} />
         </Stack.Navigator>
     )
 }

@@ -22,6 +22,7 @@ export default function orderListing(props) {
 
     if (props.route.params) {
         let orderDetails = props.route.params.payload.data;
+        let buyerDetails = JSON.parse(orderDetails.buyer);
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>
@@ -58,7 +59,7 @@ export default function orderListing(props) {
                             Address
                         </Text>
                         <Text style={styles.leftRight}>
-                            {orderDetails.buyer.address}
+                            {buyerDetails.address}
                         </Text>
                     </View>
                     
@@ -89,7 +90,8 @@ export default function orderListing(props) {
                             </TouchableOpacity>
                         </View>
                     }
-                </View>
+
+               </View> 
             </View>
         )
     } else {
@@ -137,10 +139,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
         width: 100,
     },
+    leftRight: {
+        textAlign: 'auto',
+        flexDirection: 'row',
+        flexShrink: 1
+    },
     rightList: {
         color: '#383F51',
         fontFamily: "NunitoSans-SemiBold",
         fontSize: 16,
+        width: 20
     },
     buttonAcceptReject: {
         display: 'flex',

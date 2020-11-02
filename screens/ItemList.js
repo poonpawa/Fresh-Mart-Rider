@@ -10,7 +10,7 @@ const ItemList = ({ navigation }) => {
     useEffect(() => {
         UserService().getValue('orderID').then((id) => {
             OrderService().getOrderData(id).then((data) => {
-                console.log('productDat' + data);
+                console.log('productData' + data);
                 setProductData(data);
             })
         })
@@ -18,7 +18,8 @@ const ItemList = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            {
+            {productData? <View>
+                {
                 productData.products && productData.products.map((prop, key) => {
                     {
                         return (
@@ -41,8 +42,9 @@ const ItemList = ({ navigation }) => {
             </View>
             <ReachedStoreBtn orderId={productData.id} navigate={navigation.navigate} />
 
+        </View> : null
+        }
         </View>
-
     )
 }
 
