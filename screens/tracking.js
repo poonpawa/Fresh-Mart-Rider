@@ -31,10 +31,9 @@ const tracking = (props) => {
 
     return (
         <View>
-            <Text>Order ID:{orderId}</Text>
             {orderData && buyerLocation && riderLocation ?
                 <View style={styles.container}>
-                    <Text>Address: {orderData.shippingAddress}</Text>
+                    
                     <View style={styles.mapContainer}>
                         <MapView
                             style={styles.map}
@@ -56,15 +55,21 @@ const tracking = (props) => {
                                 image={require('../assets/Icons/Rider_marker.png')}
                             />
                         </MapView>
-                    </View>
-                    <Button
-                        buttonStyle={{ borderRadius: 0, marginVertical: 10, marginHorizontal: 20 }}
-                        title='Order Delivered' onPress={() => orderDelivered(orderId)} />
+                        <View style={styles.timeline}>
+                            <Text style={styles.timelineOrderId}>Order ID:{orderId}</Text>
+                            <View style={{height: 8, backgroundColor: '#F3F3F3'}}></View>
+                            <Text style={styles.timelineAddress}>Address: {orderData.shippingAddress}</Text>
+                            <View style={styles.timelineFooter}>
+                                <Button buttonStyle={{ borderRadius: 4, backgroundColor: '#C75300', width: '90%', height: 36 }}
+                                title='Order Delivered' onPress={() => orderDelivered(orderId)} />
+                            </View>
+                        </View>
+                    </View>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                 </View> : null
             }
         </View>
-    )
-}
+    )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
 export default tracking
 
@@ -79,4 +84,30 @@ const styles = StyleSheet.create({
     map: {
         ...StyleSheet.absoluteFillObject,
     },
+    timeline: {
+        backgroundColor: 'white',
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+    },
+    timelineFooter: {
+        paddingLeft: 16,
+        paddingRight: 16,
+    },
+    timelineAddress: {
+        color: '#383F51', 
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        paddingLeft: 16,
+        marginTop: 12,
+        marginBottom: 12  
+    },
+    timelineOrderId: {
+        color: '#383F51', 
+        fontSize: 16,
+        fontFamily: "NunitoSans-SemiBold",
+        paddingLeft: 16,
+        marginTop: 12,
+        marginBottom: 12
+    }
 })

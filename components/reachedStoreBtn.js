@@ -20,11 +20,11 @@ const reachedStoreBtn = (props) => {
         <View>
             {!statusChanged ?
                 <Button
-                    buttonStyle={{ borderRadius: 0, marginVertical: 10 }}
+                    buttonStyle={{ borderRadius: 4, marginVertical: 20, backgroundColor: '#C75300' }}
                     title='Reached the Store' onPress={() => changeRiderStatus(props.orderId, 1)} />
                 :
                 <Button
-                    buttonStyle={{ borderRadius: 0, marginVertical: 10 }}
+                    buttonStyle={{ borderRadius: 4, marginVertical: 20, backgroundColor: '#C75300' }}
                     title='On way to Destination' onPress={() => changeRiderStatus(props.orderId, 0)} />
 
             }

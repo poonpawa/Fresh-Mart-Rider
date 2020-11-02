@@ -18,6 +18,7 @@ import SplashScreen from '../screens/splashScreen';
 import Account from '../screens/account';
 import OrderHistory from '../screens/orderHistory';
 import ModalHeader from '../components/headers/modalHeader';
+import LogoHeader from '../components/headers/logoHeader';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -107,9 +108,18 @@ const OrderNavigation = () => {
 
 const AppNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Home" component={bottomNavigation} />
-            <Stack.Screen name="orderDetails" component={TopTapNavigation} />
+        <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: true }}>
+            <Stack.Screen name="Home" component={bottomNavigation} 
+                options={{
+                header: ({ navigation }) => (
+                    <LogoHeader/>
+                )
+            }}/>
+            <Stack.Screen name="orderDetails" component={TopTapNavigation} options={{
+                header: ({ navigation }) => (
+                    <LogoHeader/>
+                )
+            }} />
             <Stack.Screen name="tracking" component={Tracking} />
             <Stack.Screen name="delivered" component={Delivered} />
         </Stack.Navigator>
