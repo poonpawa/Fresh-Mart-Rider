@@ -9,9 +9,11 @@ import messaging from '@react-native-firebase/messaging';
 const home = (props) => {
     let useObj = {}
     const { navigate } = props.navigation;
-    const displayName = firebase.auth().currentUser.displayName;
+     const [name, setname] = useState(null)
+     
 
     useEffect(() => {
+        setname(firebase.auth().currentUser.displayName)
         //get Token for every logged-in user & store in db
         NotificationTokenService().getTokenAndStore()
         messaging().onMessage((payload) => {
@@ -22,7 +24,7 @@ const home = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.heading}>Welcome </Text><Text style={{color: '#C75300', fontSize: 25}}>{displayName}</Text>
+                <Text style={styles.heading}>Welcome </Text><Text style={{color: '#C75300', fontSize: 25}}>{name}</Text>
             </View>
             <Image style={{marginTop: -100}}
                     source={require('../assets/Images/RiderClipart.png')}

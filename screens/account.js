@@ -9,7 +9,13 @@ const account = (props) => {
         auth().signOut()
             .then(() => {
                 console.log('User signed out!')
-                navigate('Auth')
+                props.navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        key: null,
+                        routes: [{name: 'Login'}]
+                    })
+                )
             });
     }
 

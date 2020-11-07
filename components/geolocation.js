@@ -30,7 +30,7 @@ const geolocation = () => {
                   },
                   error => Alert.alert(error.message),
                   {
-                      enableHighAccuracy: true,
+                      enableHighAccuracy: false,
                       timeout: 20000,
                       maximumAge: 1000,
                       distanceFilter: 1 //for 1metre accuracy

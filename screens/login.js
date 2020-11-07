@@ -3,7 +3,6 @@ import { Button } from 'react-native-elements';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-
 const login = (props) => {
     const { navigate } = props.navigation
     const [email, setEmail] = useState(null)
