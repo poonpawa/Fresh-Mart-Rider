@@ -26,10 +26,7 @@ const home = (props) => {
             <View style={styles.content}>
                 <Text style={styles.heading}>Welcome </Text><Text style={{color: '#C75300', fontSize: 25}}>{name}</Text>
             </View>
-            <Image style={{marginTop: -100}}
-                    source={require('../assets/Images/RiderClipart.png')}
-                    style={{ width: 200, height: 250 }}
-            />
+            <Image  source={require('../assets/Images/RiderClipart.png')} />
             
             <AvailabilitySwitch />
         </View>
@@ -39,9 +36,7 @@ const home = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        marginTop: 30,
-        fontFamily: "NunitoSans-SemiBold"
+        height: '100%'
     },
     content: {
         flexDirection: 'row',
