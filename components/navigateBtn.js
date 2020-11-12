@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Linking, TouchableOpacity } from 'react-native'
-import { Button } from "react-native-elements";
+import { Button, Text } from "react-native-elements";
 import OrderService from '../services/order-service';
 
 const navigateBtn = (props) => {
