@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Linking } from 'react-native'
+import { StyleSheet, View, Linking, TouchableOpacity } from 'react-native'
 import { Button } from "react-native-elements";
 import OrderService from '../services/order-service';
 
@@ -20,13 +20,21 @@ const navigateBtn = (props) => {
 
     return (
         <View>
-            <Button
-                buttonStyle={{ borderRadius: 4, marginVertical: 10, marginHorizontal: 0, backgroundColor: '#C75300',}}
-                title='navigate' onPress={() => startNavigation()} />
+            <TouchableOpacity onPress={() => startNavigation()} style={styles.btnOrderDetails}>
+                <Text style={styles.textOrderDetails}>
+                    Navigate
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
 
 export default navigateBtn
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    textOrderDetails: {
+        color: '#C75300',
+        fontFamily: "NunitoSans-Bold",
+        fontSize: 14,
+    }
+})

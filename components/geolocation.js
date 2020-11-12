@@ -64,16 +64,15 @@ const geolocation = () => {
 }
 const styles = StyleSheet.create({
     textContainer: {
-        width: 350,
-        marginTop: 20,
         alignSelf: "center",
-        fontSize: 15,
-        height: 35
+        height: 40,
+        color: 'white',
+        fontFamily: "NunitoSans-Bold",
+        fontSize: 16,
     },
     btn: {
-        width: 200,
+        width: 300,
         backgroundColor: "#C75300",
-        marginTop: 40,
         alignSelf: "center"
     }
 })

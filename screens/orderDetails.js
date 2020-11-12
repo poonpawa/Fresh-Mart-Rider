@@ -42,8 +42,8 @@ const orderDetails = ({ navigation, route }) => {
                         <Text style={styles.leftList}>
                             Address
                         </Text>
-                        <View style={styles.leftRight}>
-                            <Text>
+                        <View>
+                            <Text style={styles.leftRight}>
                                 {orderData.shippingAddress}
                             </Text>
                             <NavigateBtn orderId={orderData.id} />        
@@ -93,13 +93,18 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         marginTop: 12,
-        alignItems: 'center'
+        alignItems: 'flex-start'
     },
     leftList: {
         color: '#6A748A',
         fontFamily: "NunitoSans-SemiBold",
         fontSize: 16,
         width: 120,
+    },
+    leftRight: {
+        color: '#383F51',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
     },
     rightList: {
         color: '#383F51',
