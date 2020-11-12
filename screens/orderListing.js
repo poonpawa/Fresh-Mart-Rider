@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     eachRow: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         marginTop: 12,
         paddingLeft: 16,
         paddingRight: 16
@@ -142,7 +142,10 @@ const styles = StyleSheet.create({
     leftRight: {
         textAlign: 'auto',
         flexDirection: 'row',
-        flexShrink: 1
+        flexShrink: 1,
+        color: '#383F51',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
     },
     rightList: {
         color: '#383F51',

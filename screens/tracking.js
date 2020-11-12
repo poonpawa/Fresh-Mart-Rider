@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { Button } from "react-native-elements";
 import OrderService from '../services/order-service';
 import UserService from "../services/user-service";
@@ -64,20 +64,27 @@ const tracking = (props) => {
                                 title='Order Delivered' onPress={() => orderDelivered(orderId)} />
                             </View>
                         </View>
-                    </View>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                    </View>                                                                  
                 </View> : null
             }
         </View>
-    )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    )
+} 
 
 export default tracking
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        height: '100%'
+    },
     mapContainer: {
         ...StyleSheet.absoluteFillObject,
-        height: 650,
-        width: 450,
+        height: windowHeight,
+        width: windowWidth,
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
@@ -87,12 +94,13 @@ const styles = StyleSheet.create({
     timeline: {
         backgroundColor: 'white',
         position: 'absolute',
-        bottom: 0,
+        bottom: 60,
         width: '100%',
     },
     timelineFooter: {
         paddingLeft: 16,
         paddingRight: 16,
+        marginBottom: 16
     },
     timelineAddress: {
         color: '#383F51', 

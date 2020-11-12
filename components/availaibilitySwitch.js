@@ -23,12 +23,12 @@ const availaibilitySwitch = () => {
         
         {!isEnabled? 
             <View style={{ alignItems: 'center'}}>
-                <Text>You are offline</Text>
-                <Text>You need to be online to start deliverying</Text>
+                <Text style={styles.offline}>You are offline</Text>
+                <Text style={styles.startDelivery}>You need to be online to start deliverying</Text>
             </View>
             :
             <View style={{alignItems: 'center'}}>
-                <Text style={{color: 'blue'}}>You are now online</Text>
+                <Text style={styles.offline}>You are now online</Text>
             </View>
         }
             <View style={styles.content}>
@@ -50,19 +50,31 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         alignItems: 'center',
-        height: 100,
-        padding: 20,
-        flex: 1
+        flex: 1,
+        height: 200,
+    },
+    offline: {
+        color: '#6A748A',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 14,
+    },
+    startDelivery: {
+        color: '#383F51',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
+        marginTop: 8,
+        marginBottom: 12,
     },
     switchText: {
         fontSize: 20,
-        fontFamily: "NunitoSans-SemiBold",
-        paddingHorizontal: 10
+        color: '#383F51',
+        fontFamily: "NunitoSans-Bold",
     },
     content: {
         flexDirection: 'row',
         width: 200,
         fontSize: 20,
+        marginTop: 12,
     },
     switch: {
         width: 50
