@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { Button, Card, Icon } from 'react-native-elements';
 import NotificationTokenService from '../services/notification-token-service';
 import UserService from "../services/user-service";
+import OrderService from '../services/order-service'
 
 export default function orderListing(props) {
     const [isOrderAccepted, setIsOrderAccepted] = useState(false)
@@ -10,9 +11,13 @@ export default function orderListing(props) {
     const orderResponse = (response, orderDetails) => {
         NotificationTokenService().sendResponseToBuyer(response, orderDetails).then((res) => {
             if (res) {
-                setIsOrderAccepted(true)
-                console.log('order Accepted');
+                
+                console.log('order Accepted', response, orderDetails);
+                //OrderService().createOrderCollection()
                 UserService().AddData('orderID', props.route.params.payload.data.orderNumber);
+                OrderService().createOrderCollection(props.route.params.payload.data.orderNumber, orderDetails).then(() => {
+                    setIsOrderAccepted(true)
+                })
             } else {
                 console.log('order Rejected');
             }
