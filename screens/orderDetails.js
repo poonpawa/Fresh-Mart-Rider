@@ -67,8 +67,6 @@ const orderDetails = ({ navigation, route }) => {
                             {orderData.id}
                         </Text>
                     </View>
-
-                    <ReachedStoreBtn orderId={orderData.id} navigate={navigation.navigate} style={styles.reachedBtn}/>
                 </View>
                 : null}
         </View>

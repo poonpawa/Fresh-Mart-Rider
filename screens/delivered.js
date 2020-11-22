@@ -11,7 +11,7 @@ const delivered = (props) => {
             />
             <Text style={styles.heading}>Order Delivered</Text>
             <Text style={styles.title}>Your Order was Delivered</Text>
-            <Text style={styles.linkText} onPress={() => props.navigation.navigate('Home')}>Order Again</Text>
+            <Text style={styles.linkText} onPress={() => props.navigation.navigate('Home')}>Deliver Another Order</Text>
         </View>
     )
 }

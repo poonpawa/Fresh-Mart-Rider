@@ -10,8 +10,7 @@ export default function orderListing(props) {
     var details = {}
     const orderResponse = (response, orderDetails) => {
         NotificationTokenService().sendResponseToBuyer(response, orderDetails).then((res) => {
-            if (res) {
-                
+            if (res) {            
                 console.log('order Accepted', response, orderDetails);
                 //OrderService().createOrderCollection()
                 UserService().AddData('orderID', props.route.params.payload.data.orderNumber);
