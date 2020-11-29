@@ -33,7 +33,7 @@ const geolocation = () => {
                       enableHighAccuracy: false,
                       timeout: 20000,
                       maximumAge: 1000,
-                      distanceFilter: 1 //for 1metre accuracy
+                      //distanceFilter: 1 //for 1metre accuracy
                   }
               );
             } else {
@@ -56,19 +56,25 @@ const geolocation = () => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Button title="Get Device Location" buttonStyle={styles.btn} onPress={() => getLocation()} />
             <Text style={styles.textContainer}>{address}</Text>
         </View>
     )
 }
 const styles = StyleSheet.create({
+    container: {
+      //flex: 1,
+      height: 250,
+      justifyContent: 'center',
+    },
     textContainer: {
-        alignSelf: "center",
-        height: 40,
-        color: 'white',
+        display: 'flex',
+        alignItems: "center",
+        height: 120,
         fontFamily: "NunitoSans-Bold",
         fontSize: 16,
+        padding: 40
     },
     btn: {
         width: 300,

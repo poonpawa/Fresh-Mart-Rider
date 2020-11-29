@@ -7,6 +7,60 @@ const login = (props) => {
     const { navigate } = props.navigation
     const [email, setEmail] = useState(null)
     const [password, setpassword] = useState(null)
+    const [emailError, setMailError] = useState(null)
+    const [error, setError] = useState(null)
+    const [passError, setpassError] = useState(null)
+
+    const onlogin = (email, password, navigate) => {
+        if (email&& password) {
+        auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                console.log("signed-In");
+                clearErrors();
+                navigate("App")
+    
+            })
+            .catch(error => {
+                clearErrors()
+                switch(error.code){
+                    case 'auth/email-already-in-use':
+                        setMailError('That email address is already in use!')
+                        break;
+                    case 'auth/invalid-email':
+                        setMailError('That email address is invalid!')
+                        break;
+                    case 'auth/wrong-password':
+                        setpassError('Wrong Password')
+                        break;
+                    case 'auth/user-not-found':
+                        setError('You need to sign in first')
+                        break;
+                    default:
+                        setError(error.message)
+                }   
+            });
+        } else {
+            clearErrors()
+            setError('Please enter all the fields')
+        }
+    }
+
+    const clearErrors = () => {
+        setMailError(null)
+        setError(null);
+        setpassError(null)
+    }
+
+    const clearText = (e, field) => {
+        if (e.nativeEvent.key === 'Backspace') {
+            if (field === 'email') {
+                setMailError(null)
+            } else {
+                setError(null)
+            }
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -20,7 +74,12 @@ const login = (props) => {
                         autoCapitalize="none"
                         onChangeText={email => setEmail(email)}
                         value={email}
+                        onKeyPress={(e) => clearText(e, 'email')}
                     ></TextInput>
+                    {emailError!=null ?
+                        <Text style={styles.error}>{emailError}</Text>
+                        :<View></View>
+                    }
                 </View>
 
 
@@ -33,16 +92,27 @@ const login = (props) => {
                         secureTextEntry={true}
                         onChangeText={password => setpassword(password)}
                         value={password}
+                        onKeyPress={(e) => clearText(e, 'pass')}
                     ></TextInput>
+                    {passError!=null ?
+                        <Text style={styles.error}>{passError}</Text>
+                        :<View></View>
+                    }
                 </View>
 
 
-                <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
+                <View style={styles.button}>
+                    {error!=null ?
+                        <Text style={styles.errorAll}>{error}</Text>
+                        :<View></View>
+                    }
+                    <Button title="Login" onPress={() => onlogin(email, password, navigate)} buttonStyle={styles.primarybtn} />
+                </View>
 
 
                 <View style={{ alignSelf: "center", marginTop: 16 }}>
                     <Text style={{ color: "#505971", fontSize: 15, fontFamily: "NunitoSans-Regular", }}>
-                        Don't have an account?<Text style={{ color: "#C75300", fontFamily: "NunitoSans-SemiBold" }} onPress={() => { navigate("SignUp") }}> Sign Up</Text>
+                        Don't have an account?<Text style={{ color: "#C75300", fontFamily: "NunitoSans-SemiBold" }} onPress={() => { navigate("Register") }}> Sign Up</Text>
                     </Text>
                 </View>
 
@@ -51,27 +121,6 @@ const login = (props) => {
     )
 }
 
-const onlogin = (email, password, navigate) => {
-    auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(() => {
-            console.log("signed-In");
-            navigate("App")
-
-        })
-        .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-                console.log('That email address is already in use!');
-            }
-
-            if (error.code === 'auth/invalid-email') {
-                console.log('That email address is invalid!');
-            }
-
-            console.error(error);
-        });
-
-}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -89,6 +138,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: "NunitoSans-SemiBold",
         color: '#383F51'
+    },
+    error: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginTop: 8
+    },
+    errorAll: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginBottom: 8
     },
     inputbox: {
         height: 40,

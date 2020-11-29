@@ -29,7 +29,7 @@ const OrderService = () => {
                 buyerToken: orderData.token,
                 riderName: riderData.Name,
                 riderPhone: '0987865637',
-                products: products,
+                products: JSON.parse(orderdata.products),
                 totalPrice: orderdata.totalprice,
                 active: true
             })

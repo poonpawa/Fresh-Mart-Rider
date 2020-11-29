@@ -26,7 +26,13 @@ const modalHeader = (props) => {
                         height: 40,
                     },
                     onPress:
-                        () => props.navigation.goBack()
+                        () => {
+                            if (props.modalClose) {
+                                props.navigation.navigate('availabilityScreen')
+                            } else {
+                                props.navigation.goBack()
+                            }
+                        }
                 }}
                 containerStyle={styles.mainContainer}
             />

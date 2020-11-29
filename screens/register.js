@@ -8,8 +8,76 @@ const register = (props) => {
     const [email, setEmail] = useState(null),
         [password, setpassword] = useState(null),
         [name, setName] = useState(null),
-        [phone, setPhone] = useState(null)
+        [phone, setPhone] = useState(null),
+        [emailError, setMailError] = useState(null),
+        [error, setError] = useState(null),
+        [passError, setpassError] = useState(null),
+        [phoneError, setphoneError] = useState(null);
     const { navigate } = props.navigation
+
+    const onRegister = (name, email, phone, password, navigate) => {
+        if (name && email && phone && password) {
+            setError(null)
+            if (phone.length < 10) {
+                setphoneError('Invalid Phone Number. It should be 10 digits')
+            } else {
+                auth()
+                    .createUserWithEmailAndPassword(email, password)
+                    .then((User) => {
+                        console.log('User account created & signed in!');
+                        User.user.updateProfile({
+                            displayName: name
+                        }).then(() => {
+                            console.log(auth().currentUser.uid);
+                            UserService().AddUserDetails({ name, email, phone })
+                            clearErrors();
+                            navigate("App")
+                        })
+            
+                    })
+                    .catch(error => {
+                        clearErrors();
+                        switch(error.code){
+                            case 'auth/email-already-in-use':
+                                setMailError('That email address is already in use!')
+                                break;
+                            case 'auth/invalid-email':
+                                setMailError('Email address is invalid')
+                                break;
+                            case 'auth/weak-password':
+                                setpassError('Password should be at least 6 characters')
+                                break;
+                            case 'auth/operation-not allowed':
+                                setError('Credentials are not allowed')
+                                break;
+                            default:
+                                setError(error.message)
+                        }   
+                    });
+                }
+        } else {
+            setError('Please enter all the above fields')
+        }
+    }
+
+    const clearErrors = () => {
+        setMailError(null)
+        setError(null);
+        setpassError(null)
+        setphoneError(null)
+    }
+
+    const clearText = (e, field) => {
+        if (e.nativeEvent.key === 'Backspace') {
+            if (field === 'email') {
+                setMailError(null)
+            } else if (field === 'pass') {
+                setpassError(null)
+            } else {
+                setError(null)
+            }
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -36,80 +104,87 @@ const register = (props) => {
                         autoCapitalize="none"
                         onChangeText={email => setEmail(email)}
                         value={email}
+                        onKeyPress={(e) => clearText(e, 'email')}
+                        
                     ></TextInput>
                 </View>
+                {emailError!=null ?
+                    <Text style={styles.error}>{emailError}</Text>
+                    :<View></View>
+                }
 
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Phone number</Text>
                     <TextInput style={styles.inputbox}
                         underlineColorAndroid = "transparent" 
                         selectionColor ='#C75300'
-                        placeholder="Phone"
+                        keyboardType='numeric'
+                        placeholder="10 digit phone number"
                         autoCapitalize="none"
                         onChangeText={phone => setPhone(phone)}
                         value={phone}
+                        onKeyPress={(e) => clearText(e, 'phone')}
                     ></TextInput>
                 </View>
-
+                {phoneError!=null ?
+                    <Text style={styles.error}>{phoneError}</Text>
+                    :<View></View>
+                }
 
                 <View style={styles.inputcontainer}>
                     <Text style={styles.inputlabel}>Password</Text>
                     <TextInput style={styles.inputbox} 
                         underlineColorAndroid = "transparent"
                         selectionColor ='#C75300'
-                        placeholder="Password"
+                        placeholder="At least 6 characters"
                         autoCapitalize="none"
                         secureTextEntry={true}
                         onChangeText={password => setpassword(password)}
                         value={password}
+                        onKeyPress={(e) => clearText(e, 'pass')}
                     ></TextInput>
                 </View>
+                {passError!=null ?
+                    <Text style={styles.error}>{passError}</Text>
+                    :<View></View>
+                }
 
-                <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.primarybtn} />
+                <View style={styles.button}>
+                    {error!=null ?
+                        <Text style={styles.errorAll}>{error}</Text>
+                        :<View></View>
+                    }
+                    <Button title="Sign Up" onPress={() => onRegister(name, email, phone, password, navigate)} buttonStyle={styles.primarybtn} />
+                </View>
 
 
                 <View style={{ alignSelf: "center", marginTop: 16 }}>
                     <Text style={{ color: "#505971", fontSize: 15, fontFamily: "NunitoSans-Regular", }}>
-                        Already have an account?<Text style={{ color: "#C75300", fontFamily: "NunitoSans-SemiBold" }} onPress={() => { navigate("SignIn") }}> Login</Text>
+                        Already have an account?<Text style={{ color: "#C75300", fontFamily: "NunitoSans-SemiBold" }} onPress={() => { navigate("Login") }}> Login</Text>
                     </Text>
                 </View>
 
             </View>
         </View >
-    )
-}
-
-const onRegister = (name, email, phone, password, navigate) => {
-    auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((User) => {
-            console.log('User account created & signed in!');
-            User.user.updateProfile({
-                displayName: name
-            }).then(() => {
-                console.log(auth().currentUser.uid);
-                UserService().AddUserDetails({ name, email, phone })
-                navigate("App")
-            })
-
-        })
-        .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-                console.log('That email address is already in use!');
-            }
-
-            if (error.code === 'auth/invalid-email') {
-                console.log('That email address is invalid!');
-            }
-
-            console.error(error);
-        });
+    )  
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white'
+    },
+    error: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginTop: 8
+    },
+    errorAll: {
+        fontSize: 14,
+        fontFamily: "NunitoSans-SemiBold",
+        color: '#EF2C2C',
+        marginBottom: 8
     },
     form: {
         marginTop: 8,

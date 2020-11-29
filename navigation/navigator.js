@@ -130,12 +130,12 @@ const AppNavigation = () => {
             }} />
             <Stack.Screen name="tracking" component={Tracking} options={{
                 header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} />    
+                        <ModalHeader navigation={navigation} modalClose={true}/>    
                     )    
             }}/>
             <Stack.Screen name="delivered" component={Delivered} options={{
                 header: ({ navigation }) => (
-                        <ModalHeader navigation={navigation} />    
+                        <ModalHeader navigation={navigation} modalClose={true}/>    
                     )    
             }} />
         </Stack.Navigator>

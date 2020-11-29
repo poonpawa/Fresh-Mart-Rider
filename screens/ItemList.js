@@ -4,6 +4,7 @@ import { ListItem } from "react-native-elements";
 import ReachedStoreBtn from "../components/reachedStoreBtn";
 import UserService from '../services/user-service';
 import OrderService from '../services/order-service';
+import * as _ from 'lodash';
 
 const ItemList = ({ navigation }) => {
     const [productData, setProductData] = useState([])
@@ -11,7 +12,12 @@ const ItemList = ({ navigation }) => {
         UserService().getValue('orderID').then((id) => {
             OrderService().getOrderData(id).then((data) => {
                 console.log('productData' + data);
+                if (!_.isObject(data.products)) {
+                    data.products = JSON.parse(data.products)
+                } 
                 setProductData(data);
+                
+                
             })
         })
     }, [])
@@ -29,7 +35,7 @@ const ItemList = ({ navigation }) => {
                                     {prop.quantity} x {prop.ProductName}
                                 </Text>
                                 <Text style={styles.eachproductPrice}>
-                                    {prop.Price} Euro
+                                € {prop.Price} 
                                 </Text>
                             </View>
                         )
@@ -38,7 +44,7 @@ const ItemList = ({ navigation }) => {
             }
             <View style={styles.itemsTotalContainer}>
                 <Text style={styles.itemsTotal}>Items Total</Text>
-                <Text style={styles.itemsTotalPrice}>{productData.totalPrice} Euro</Text>
+                <Text style={styles.itemsTotalPrice}> € {productData.totalPrice}</Text>
             </View>
             <ReachedStoreBtn orderId={productData.id} navigate={navigation.navigate} />
 

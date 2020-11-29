@@ -4,15 +4,17 @@ import { ScrollView } from 'react-native-gesture-handler'
 import OrderService from '../services/order-service'
 import firebase from "@react-native-firebase/app"
 import { ListItem, Button, Text } from 'react-native-elements'
+import { useIsFocused } from '@react-navigation/native';
 
 const orderHistory = (props) => {
+    const isFocused = useIsFocused();
     const [orders, setOrders] = useState([])
     useEffect(() => {
         const userId = firebase.auth().currentUser.uid;
         OrderService().getAllOrders(userId).then((data) => {
             setOrders(data)
         })
-    })
+    },[isFocused])
 
 
     return (
